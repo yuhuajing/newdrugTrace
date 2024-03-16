@@ -345,7 +345,7 @@ func registerUser(c *fiber.Ctx) error {
 			Data:    "",
 		})
 	}
-	err := database.InsertUserInfo(payload.Username, payload.Password, payload.Email, payload.Phone, tabletypes.User)
+	err := database.InsertUserInfo(payload.Username, payload.Password, payload.Email, payload.Phone, payload.Identity)
 	if err != nil {
 		return c.Status(400).JSON(DataResponse{
 			Error:   err.Error(),
