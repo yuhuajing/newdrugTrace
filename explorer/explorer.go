@@ -15,19 +15,20 @@ import (
 )
 
 func Explorer() {
-
+	// 路由分之
 	app := fiber.New(fiber.Config{
 		Views: html.New("./explorer/views", ".html"),
 	})
+	//静态界面
 	app.Static("/", "./explorer/public")
-
+	//默认进入 index.html界面
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.Render("index", nil)
 	})
-	app.Post("/login", deallogin)
-	app.Post("/registerUser", registerUser)
-	app.Post("/adminfunc", manageuser)
-	app.Post("/produserfunc", produserfunc)
+	app.Post("/login", deallogin)           //登录分支
+	app.Post("/registerUser", registerUser) //注册分支
+	app.Post("/adminfunc", manageuser)      //管理员界面
+	app.Post("/produserfunc", produserfunc) //
 	app.Get("/approveuser", approveuser)
 	app.Post("/giveapprove", giveapprove)
 	app.Post("/removeapprove", removeapprove)
@@ -344,7 +345,7 @@ func registerUser(c *fiber.Ctx) error {
 			Data:    "",
 		})
 	}
-	err := database.InsertUserInfo(payload.Username, payload.Password, payload.Email, payload.Phone, payload.Identity)
+	err := database.InsertUserInfo(payload.Username, payload.Password, payload.Email, payload.Phone, tabletypes.User)
 	if err != nil {
 		return c.Status(400).JSON(DataResponse{
 			Error:   err.Error(),

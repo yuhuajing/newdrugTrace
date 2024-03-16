@@ -4,6 +4,6 @@ import (
 	"main/explorer"
 )
 
-func main() {
+func main() { //进入主程序
 	explorer.Explorer()
 }
